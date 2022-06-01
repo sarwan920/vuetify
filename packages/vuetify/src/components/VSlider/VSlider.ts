@@ -219,16 +219,10 @@ export default mixins<options &
     },
     value: {
       handler (v: number) {
-        this.internalValue = v
+        this.internalValue = isNaN(v) ? this.minValue : v
       },
+      immediate: true,
     },
-  },
-
-  // If done in as immediate in
-  // value watcher, causes issues
-  // with vue-test-utils
-  beforeMount () {
-    this.internalValue = this.value
   },
 
   mounted () {
